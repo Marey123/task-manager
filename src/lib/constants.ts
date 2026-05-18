@@ -18,6 +18,33 @@ export const TASK_STORAGE_KEY = 'task-manager.tasks.json'
 export const DEFAULT_TASK_COLOR: TaskColor = 'pink'
 export const DEFAULT_TASK_ICON: TaskIcon = '🦄'
 
+export const DECORATIVE_EMOJIS = [
+  { className: 'unicorn-runner unicorn-runner-one', emoji: '🦄' },
+  { className: 'unicorn-runner unicorn-runner-two', emoji: '🦄' },
+  { className: 'floating-heart floating-heart-one', emoji: '💖' },
+  { className: 'floating-heart floating-heart-two', emoji: '🌈' },
+  { className: 'bg-emoji bg-emoji-one', emoji: '✨' },
+  { className: 'bg-emoji bg-emoji-two', emoji: '💗' },
+  { className: 'bg-emoji bg-emoji-three', emoji: '🌸' },
+  { className: 'bg-emoji bg-emoji-four', emoji: '⭐' },
+  { className: 'bg-emoji bg-emoji-five', emoji: '🎀' },
+  { className: 'bg-emoji bg-emoji-six', emoji: '💫' },
+  { className: 'bg-emoji bg-emoji-seven', emoji: '🌷' },
+  { className: 'bg-emoji bg-emoji-eight', emoji: '💕' },
+  { className: 'bg-emoji bg-emoji-nine', emoji: '🩷' },
+  { className: 'bg-emoji bg-emoji-ten', emoji: '🌟' },
+  { className: 'bg-emoji bg-emoji-eleven', emoji: '💐' },
+  { className: 'bg-emoji bg-emoji-twelve', emoji: '💞' },
+  { className: 'bg-emoji bg-emoji-thirteen', emoji: '🦄' },
+  { className: 'bg-emoji bg-emoji-fourteen', emoji: '✨' },
+  { className: 'bg-emoji bg-emoji-fifteen', emoji: '🌺' },
+  { className: 'bg-emoji bg-emoji-sixteen', emoji: '💖' },
+  { className: 'bg-emoji bg-emoji-seventeen', emoji: '🌈' },
+  { className: 'bg-emoji bg-emoji-eighteen', emoji: '🎀' },
+  { className: 'bg-emoji bg-emoji-nineteen', emoji: '💫' },
+  { className: 'bg-emoji bg-emoji-twenty', emoji: '🩷' },
+] as const
+
 export const REQUIRED_TASK_FIELD_TYPES = {
   id: 'string',
   title: 'string',

@@ -10,6 +10,7 @@ import {
   updateTask,
 } from './features/tasks/tasksSlice'
 import { useCurrentTime } from './hooks/useCurrentTime'
+import { DECORATIVE_EMOJIS } from './lib/constants'
 import { buildPagesByAvailableHeight } from './lib/notebookPages'
 import { createTimeSlots, timeToMinutes } from './lib/timeUtils'
 import { useAppDispatch, useAppSelector } from './store'
@@ -124,30 +125,11 @@ function App() {
 
   return (
     <main className="unicorn-bg relative min-h-screen overflow-hidden px-4 py-6 text-pink-900 md:px-8">
-      <div className="unicorn-runner unicorn-runner-one">🦄</div>
-      <div className="unicorn-runner unicorn-runner-two">🦄</div>
-      <div className="floating-heart floating-heart-one">💖</div>
-      <div className="floating-heart floating-heart-two">🌈</div>
-      <div className="bg-emoji bg-emoji-one">✨</div>
-      <div className="bg-emoji bg-emoji-two">💗</div>
-      <div className="bg-emoji bg-emoji-three">🌸</div>
-      <div className="bg-emoji bg-emoji-four">⭐</div>
-      <div className="bg-emoji bg-emoji-five">🎀</div>
-      <div className="bg-emoji bg-emoji-six">💫</div>
-      <div className="bg-emoji bg-emoji-seven">🌷</div>
-      <div className="bg-emoji bg-emoji-eight">💕</div>
-      <div className="bg-emoji bg-emoji-nine">🩷</div>
-      <div className="bg-emoji bg-emoji-ten">🌟</div>
-      <div className="bg-emoji bg-emoji-eleven">💐</div>
-      <div className="bg-emoji bg-emoji-twelve">💞</div>
-      <div className="bg-emoji bg-emoji-thirteen">🦄</div>
-      <div className="bg-emoji bg-emoji-fourteen">✨</div>
-      <div className="bg-emoji bg-emoji-fifteen">🌺</div>
-      <div className="bg-emoji bg-emoji-sixteen">💖</div>
-      <div className="bg-emoji bg-emoji-seventeen">🌈</div>
-      <div className="bg-emoji bg-emoji-eighteen">🎀</div>
-      <div className="bg-emoji bg-emoji-nineteen">💫</div>
-      <div className="bg-emoji bg-emoji-twenty">🩷</div>
+      {DECORATIVE_EMOJIS.map(({ className, emoji }) => (
+        <div className={className} key={className}>
+          {emoji}
+        </div>
+      ))}
       <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-6">
         <Header
           currentTime={currentTime}
