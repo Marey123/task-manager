@@ -27,6 +27,24 @@ body {
   margin: 0;
 }
 
+.pretty-select {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #be185d 50%),
+    linear-gradient(135deg, #be185d 50%, transparent 50%);
+  background-position:
+    calc(100% - 22px) 50%,
+    calc(100% - 14px) 50%;
+  background-repeat: no-repeat;
+  background-size: 8px 8px, 8px 8px;
+  cursor: pointer;
+  padding-right: 3rem;
+}
+
+.pretty-select::-ms-expand {
+  display: none;
+}
+
 .unicorn-bg {
   background:
     radial-gradient(circle at 10% 10%, rgba(244, 114, 182, 0.35), transparent 28rem),

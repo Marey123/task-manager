@@ -12,6 +12,7 @@ import {
   TASK_COLOR_OPTIONS,
   TASK_ICONS,
 } from '../lib/constants'
+import { texts } from '../lib/texts'
 
 type TaskFormProps = {
   timeSlots: string[]
@@ -77,17 +78,17 @@ export const TaskForm = ({
       onSubmit={handleSubmit}
     >
       <h2 className="mb-4 text-xl font-black text-pink-950">
-        {titleText ?? (editingTask ? 'Edit task ✨' : 'Create task 🦄')}
+        {titleText ?? (editingTask ? texts.taskForm.editTitle : texts.taskForm.createTitle)}
       </h2>
 
       <label className="block text-sm font-black text-pink-950" htmlFor="task-title">
-        Title
+        {texts.taskForm.titleLabel}
       </label>
       <input
         className="mt-2 w-full rounded-2xl border-2 border-pink-300 bg-pink-50/80 px-4 py-3 font-semibold text-pink-950 outline-none transition placeholder:text-pink-500 focus:border-fuchsia-600 focus:bg-white focus:ring-4 focus:ring-pink-200"
         id="task-title"
         onChange={(event) => setTitle(event.target.value)}
-        placeholder="e.g. Feed the unicorn"
+        placeholder={texts.taskForm.titlePlaceholder}
         type="text"
         value={title}
       />
@@ -96,10 +97,10 @@ export const TaskForm = ({
         className="mt-4 block text-sm font-black text-pink-950"
         htmlFor="task-time"
       >
-        Time slot
+        {texts.taskForm.timeSlotLabel}
       </label>
       <select
-        className="mt-2 w-full rounded-2xl border-2 border-pink-300 bg-pink-50/80 px-4 py-3 font-semibold text-pink-950 outline-none transition focus:border-fuchsia-600 focus:bg-white focus:ring-4 focus:ring-pink-200"
+        className="pretty-select mt-2 w-full rounded-2xl border-2 border-pink-300 bg-pink-50/80 px-4 py-3 font-semibold text-pink-950 outline-none transition focus:border-fuchsia-600 focus:bg-white focus:ring-4 focus:ring-pink-200"
         id="task-time"
         onChange={(event) => setStartTime(event.target.value)}
         value={startTime}
@@ -113,9 +114,9 @@ export const TaskForm = ({
 
       <fieldset className="mt-4">
         <legend className="block text-sm font-black text-pink-950">
-          Card color
+          {texts.taskForm.cardColorLabel}
         </legend>
-        <div className="mt-2 flex items-center gap-3 rounded-2xl border-2 border-pink-300 bg-pink-50/80 px-4 py-3 transition focus-within:border-fuchsia-600 focus-within:bg-white focus-within:ring-4 focus-within:ring-pink-200">
+        <div className="mt-2 flex items-center gap-3 rounded-2xl border-2 border-pink-300 bg-pink-50/80 pl-4 py-3 transition focus-within:border-fuchsia-600 focus-within:bg-white focus-within:ring-4 focus-within:ring-pink-200">
           <span
             aria-hidden="true"
             className={`h-7 w-7 shrink-0 rounded-full border-2 border-white shadow ${
@@ -123,7 +124,7 @@ export const TaskForm = ({
             }`}
           />
           <select
-            className="min-w-0 flex-1 bg-transparent font-semibold text-pink-950 outline-none"
+            className="pretty-select min-w-0 flex-1 bg-transparent font-semibold text-pink-950 outline-none"
             onChange={(event) => setColor(event.target.value as TaskColor)}
             value={color}
           >
@@ -138,10 +139,10 @@ export const TaskForm = ({
 
       <fieldset className="mt-4">
         <legend className="block text-sm font-black text-pink-950">
-          Task icon
+          {texts.taskForm.taskIconLabel}
         </legend>
         <select
-          className="mt-2 w-full rounded-2xl border-2 border-pink-300 bg-pink-50/80 px-4 py-3 text-2xl font-semibold text-pink-950 outline-none transition focus:border-fuchsia-600 focus:bg-white focus:ring-4 focus:ring-pink-200"
+          className="pretty-select mt-2 w-full rounded-2xl border-2 border-pink-300 bg-pink-50/80 px-4 py-3 text-2xl font-semibold text-pink-950 outline-none transition focus:border-fuchsia-600 focus:bg-white focus:ring-4 focus:ring-pink-200"
           onChange={(event) => setIcon(event.target.value as TaskIcon)}
           value={icon}
         >
@@ -158,7 +159,8 @@ export const TaskForm = ({
           className="rounded-2xl bg-gradient-to-r from-pink-700 to-fuchsia-700 px-5 py-3 font-black text-white shadow-lg shadow-pink-300 transition hover:-translate-y-0.5 hover:from-pink-800 hover:to-fuchsia-800"
           type="submit"
         >
-          {submitLabel ?? (editingTask ? 'Save task' : 'Add task')}
+          {submitLabel ??
+            (editingTask ? texts.taskForm.editSubmitLabel : texts.taskForm.createSubmitLabel)}
         </button>
 
         {editingTask && (
@@ -167,7 +169,7 @@ export const TaskForm = ({
             onClick={handleCancelEdit}
             type="button"
           >
-            Cancel
+            {texts.taskForm.cancelButton}
           </button>
         )}
       </div>

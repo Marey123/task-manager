@@ -4,6 +4,7 @@ import {
   STATUS_CLASS_NAME,
   TIME_CLASS_NAME,
 } from '../lib/constants'
+import { texts } from '../lib/texts'
 import { getTaskStatus, getTaskTimeLabel } from '../lib/timeUtils'
 
 type TaskCardProps = {
@@ -46,14 +47,14 @@ export const TaskCard = ({ task, currentTime, onDelete, onEdit }: TaskCardProps)
           onClick={() => onEdit(task)}
           type="button"
         >
-          Edit
+          {texts.taskCard.editButton}
         </button>
         <button
           className="rounded-xl border-2 border-rose-300 px-3 py-2 text-sm font-black text-rose-950 transition hover:bg-rose-50"
           onClick={() => onDelete(task.id)}
           type="button"
         >
-          Delete
+          {texts.taskCard.deleteButton}
         </button>
       </div>
     </article>

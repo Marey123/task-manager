@@ -12,6 +12,7 @@ import {
 import { useCurrentTime } from './hooks/useCurrentTime'
 import { DECORATIVE_EMOJIS } from './lib/constants'
 import { buildPagesByAvailableHeight } from './lib/notebookPages'
+import { texts } from './lib/texts'
 import { createTimeSlots, timeToMinutes } from './lib/timeUtils'
 import { useAppDispatch, useAppSelector } from './store'
 
@@ -146,9 +147,11 @@ function App() {
               <div className="mb-4 flex items-center justify-between gap-4">
                 <div>
                   <p className="text-sm font-black uppercase tracking-[0.25em] text-fuchsia-800">
-                    Magical modal
+                    {texts.app.createTaskModalEyebrow}
                   </p>
-                  <h2 className="text-2xl font-black text-pink-950">New task</h2>
+                  <h2 className="text-2xl font-black text-pink-950">
+                    {texts.app.createTaskModalTitle}
+                  </h2>
                 </div>
                 <button
                   className="rounded-2xl border-2 border-pink-300 bg-pink-50 px-4 py-2 text-xl font-black text-pink-950 transition hover:bg-pink-100"
@@ -165,9 +168,45 @@ function App() {
                   key="create-task"
                   onCancelEdit={() => setIsCreateFormOpen(false)}
                   onSubmit={handleSubmit}
-                  submitLabel="Add to notebook"
+                  submitLabel={texts.app.createTaskSubmitLabel}
                   timeSlots={timeSlots}
-                  titleText="Create a new notebook task 🦄"
+                  titleText={texts.app.createTaskTitle}
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {editingTask && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-pink-950/45 p-4 backdrop-blur-sm">
+            <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-[2rem] border-2 border-pink-200 bg-white p-4 shadow-2xl shadow-pink-950/30">
+              <div className="mb-4 flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-sm font-black uppercase tracking-[0.25em] text-fuchsia-800">
+                    {texts.app.editTaskModalEyebrow}
+                  </p>
+                  <h2 className="text-2xl font-black text-pink-950">
+                    {texts.app.editTaskModalTitle}
+                  </h2>
+                </div>
+                <button
+                  className="rounded-2xl border-2 border-pink-300 bg-pink-50 px-4 py-2 text-xl font-black text-pink-950 transition hover:bg-pink-100"
+                  onClick={() => setEditingTask(null)}
+                  type="button"
+                >
+                  ×
+                </button>
+              </div>
+
+              <div className="mt-4">
+                <TaskForm
+                  editingTask={editingTask}
+                  key={editingTask.id}
+                  onCancelEdit={() => setEditingTask(null)}
+                  onSubmit={handleSubmit}
+                  submitLabel={texts.app.editTaskSubmitLabel}
+                  timeSlots={timeSlots}
+                  titleText={texts.app.editTaskTitle}
                 />
               </div>
             </div>
@@ -189,18 +228,14 @@ function App() {
                 >
                   <TimeSlot
                     currentTime={currentTime}
-                    editingTask={editingTask}
-                    onCancelEdit={() => setEditingTask(null)}
                     onDeleteTask={handleDeleteTask}
                     onEditTask={(task) => {
                       setIsCreateFormOpen(false)
                       setEditingTask(task)
                       setCurrentSpread(getSpreadByTime(task.startTime))
                     }}
-                    onSubmitEdit={handleSubmit}
                     tasks={sortedTasks.filter((task) => task.startTime === slot)}
                     time={slot}
-                    timeSlots={timeSlots}
                   />
                 </div>
               ))}
@@ -210,10 +245,10 @@ function App() {
           <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.25em] text-fuchsia-900">
-                Notebook spread
+                {texts.app.notebookSpreadEyebrow}
               </p>
               <h2 className="text-2xl font-black text-pink-950">
-                Page {activeSpread + 1} of {totalSpreads}
+                {texts.app.notebookSpreadTitle(activeSpread + 1, totalSpreads)}
               </h2>
             </div>
 
@@ -224,7 +259,7 @@ function App() {
                 onClick={() => setCurrentSpread((page) => Math.max(page - 1, 0))}
                 type="button"
               >
-                ← Prev
+                {texts.app.previousSpreadButton}
               </button>
               <button
                 className="rounded-2xl border-2 border-pink-400 bg-white px-4 py-2 font-black text-pink-950 shadow transition hover:bg-pink-50 disabled:cursor-not-allowed disabled:opacity-45"
@@ -234,7 +269,7 @@ function App() {
                 }
                 type="button"
               >
-                Next →
+                {texts.app.nextSpreadButton}
               </button>
             </div>
           </div>
@@ -251,32 +286,29 @@ function App() {
                   pageSlots.map((slot) => (
                     <TimeSlot
                       currentTime={currentTime}
-                      editingTask={editingTask}
                       key={slot}
-                      onCancelEdit={() => setEditingTask(null)}
                       onDeleteTask={handleDeleteTask}
                       onEditTask={(task) => {
                         setIsCreateFormOpen(false)
                         setEditingTask(task)
                         setCurrentSpread(getSpreadByTime(task.startTime))
                       }}
-                      onSubmitEdit={handleSubmit}
                       tasks={sortedTasks.filter((task) => task.startTime === slot)}
                       time={slot}
-                      timeSlots={timeSlots}
                     />
                   ))
                 ) : (
                   <div className="flex min-h-[520px] flex-col items-center justify-center  p-8 text-center">
-                    <div className="mt-4 text-6xl">🦄💤</div>
+                    <div className="mt-4 text-6xl">{texts.app.emptyPageEmoji}</div>
                     <h3 className="mt-6 text-4xl font-black text-pink-950">
-                      Time to sleep
+                      {texts.app.emptyPageTitle}
                     </h3>
                     <p className="mt-3 max-w-xs text-base font-bold text-fuchsia-900">
-                      No more slots on this page. Close the magical notebook and
-                      rest under the stars.
+                      {texts.app.emptyPageDescription}
                     </p>
-                    <div className="mt-6 text-3xl opacity-80">✨ ⭐ 🌸 ⭐ ✨</div>
+                    <div className="mt-6 text-3xl opacity-80">
+                      {texts.app.emptyPageDecorations}
+                    </div>
                   </div>
                 )}
               </div>
